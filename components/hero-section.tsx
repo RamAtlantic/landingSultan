@@ -217,7 +217,7 @@ export function HeroSection() {
                       }}
                     >
                       CREA TU USUARIO EN SEGUNDOS{" "}
-                      <span className="text-green-500 mt-1 font-black">
+                      <span className="mt-1 font-extrabold">
                         GRATIS
                       </span>
                     </motion.span>
@@ -319,12 +319,19 @@ export function HeroSection() {
                               💰
                             </motion.div>
                             <span className="text-md font-black">
-                              Comenzar YA!
+                              QUIERO CARGAR
                             </span>
+                            <motion.div className="text-xl ml-1">
+                              💰
+                            </motion.div>
                           </>
                         )}
                       </div>
+                     
                     </motion.button>
+                    <div className="text-xs text-gray-400 w-[100vw] text-center">
+                        Con tu carga descarga tu <span className="font-extrabold">CARTA ASTRAL</span>
+                      </div>
                   </div>
                 </motion.div>
 
