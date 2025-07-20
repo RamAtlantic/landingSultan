@@ -39,8 +39,8 @@ const siteConfig = {
   description:
     "Descubrí una nueva forma de divertirte con Sultan Loco. Juegos, premios y emoción.",
   url: "https://sultanloco.com", // Reemplaza con tu URL de producción
-  ogImage: "/sult.png", // URL del logo
-  favicon: "/sult.png", // URL del logo para favicon
+  ogImage: "https://cdn.invertimesa.workers.dev/sult.png", // URL del logo
+  favicon: "https://cdn.invertimesa.workers.dev/sult.png", // URL del logo para favicon
 };
 
 export const metadata: Metadata = {
