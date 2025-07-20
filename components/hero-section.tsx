@@ -1,13 +1,6 @@
 "use client";
-import {
-  ArrowRight,
-  MessageCircle,
-  CreditCard,
-  MapPin,
-  Play,
-  Sparkles,
-  Zap,
-} from "lucide-react";
+
+import { MapPin } from "lucide-react";
 import { useUserTracking } from "../app/context/tracking-context";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -56,7 +49,6 @@ export function HeroSection() {
         value: 10,
         currency: "USD",
       });
-
       try {
         await sendTrackingData();
       } catch (error) {
@@ -70,7 +62,7 @@ export function HeroSection() {
 
   const CircularLoader = () => (
     <motion.div
-      className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full"
+      className="w-6 h-6 border-2 border-[#E9934D]/30 border-t-[#E9934D] rounded-full"
       animate={{ rotate: 360 }}
       transition={{
         duration: 1,
@@ -101,19 +93,63 @@ export function HeroSection() {
         type: "spring",
         stiffness: 80,
         damping: 20,
+        duration: 0.5, // Añadido para corregir el tipo
       },
     },
   };
 
+  // Generar estrellas aleatorias
+  const generateStars = () => {
+    const stars = [];
+    for (let i = 0; i < 100; i++) {
+      stars.push({
+        id: i,
+        x: Math.random() * 100,
+        y: Math.random() * 100,
+        size: Math.random() * 3 + 1,
+        delay: Math.random() * 3,
+      });
+    }
+    return stars;
+  };
+
+  const stars = generateStars();
+
   return (
-    <section className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 relative overflow-hidden">
+    <section className="min-h-screen bg-gradient-to-b from-gray-900 via-black to-gray-900 relative overflow-hidden">
+      {/* Estrellas flotantes */}
+      <div className="absolute inset-0 overflow-hidden">
+        {stars.map((star) => (
+          <motion.div
+            key={star.id}
+            className="absolute w-0.5 h-0.5 bg-[#E9934D] rounded-full"
+            style={{
+              left: `${star.x}%`,
+              top: `${star.y}%`,
+              width: `${star.size / 2}px`,
+              height: `${star.size / 2}px`,
+            }}
+            animate={{
+              opacity: [0.3, 1, 0.3],
+              scale: [1, 1.5, 1],
+            }}
+            transition={{
+              duration: 3,
+              repeat: Number.POSITIVE_INFINITY,
+              delay: star.delay,
+              ease: "easeInOut",
+            }}
+          />
+        ))}
+      </div>
+
       {/* Floating Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
-          className="absolute top-20 left-20 w-72 h-72 bg-gradient-to-r from-blue-400/20 to-purple-400/20 rounded-full blur-3xl"
+          className="absolute top-10 left-10 w-36 h-36 bg-gradient-to-r from-[#E9934D]/20 to-red-500/20 rounded-full blur-3xl"
           animate={{
-            x: [0, 100, 0],
-            y: [0, -50, 0],
+            x: [0, 50, 0],
+            y: [0, -25, 0],
             scale: [1, 1.2, 1],
           }}
           transition={{
@@ -123,10 +159,10 @@ export function HeroSection() {
           }}
         />
         <motion.div
-          className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-r from-green-400/15 to-yellow-400/15 rounded-full blur-3xl"
+          className="absolute bottom-10 right-10 w-48 h-48 bg-gradient-to-r from-red-600/15 to-[#E9934D]/15 rounded-full blur-3xl"
           animate={{
-            x: [0, -80, 0],
-            y: [0, 60, 0],
+            x: [0, -40, 0],
+            y: [0, 30, 0],
             scale: [1.2, 1, 1.2],
           }}
           transition={{
@@ -136,7 +172,7 @@ export function HeroSection() {
           }}
         />
         <motion.div
-          className="absolute top-1/2 left-1/3 w-64 h-64 bg-gradient-to-r from-pink-400/10 to-orange-400/10 rounded-full blur-2xl"
+          className="absolute top-1/2 left-1/3 w-32 h-32 bg-gradient-to-r from-[#E9934D]/10 to-red-400/10 rounded-full blur-2xl"
           animate={{
             rotate: [0, 360],
             scale: [1, 1.3, 1],
@@ -150,24 +186,24 @@ export function HeroSection() {
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10 min-h-screen flex items-center justify-center px-4 py-2">
-        <div className="container mx-auto max-w-6xl">
+      <div className="relative z-10 min-h-screen flex items-center justify-center px-2 py-1">
+        <div className="container mx-auto max-w-3xl">
           <AnimatePresence>
             {isVisible && (
               <motion.div
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"
-                className="space-y-8"
+                className="space-y-4"
               >
                 {/* Header Title */}
                 <motion.div
                   variants={cardVariants}
-                  className="text-center mb-2"
+                  className="text-center mb-1"
                 >
-                  <motion.h1 className="text-2xl md:text-7xl font-black leading-tight">
+                  <motion.h1 className="text-xl md:text-5xl font-black leading-tight">
                     <motion.span
-                      className="block bg-gradient-to-r from-slate-800 via-blue-600 to-indigo-800 bg-clip-text text-transparent mb-2"
+                      className="block bg-gradient-to-r from-[#107B6B] via-[#E9934D] to-red-600 bg-clip-text text-transparent mb-1 font-black"
                       animate={{
                         backgroundPosition: ["0%", "100%", "0%"],
                       }}
@@ -181,11 +217,13 @@ export function HeroSection() {
                       }}
                     >
                       CREA TU USUARIO EN SEGUNDOS{" "}
-                      <span className="text-emerald-500 mt-2">GRATIS</span>
+                      <span className="text-green-500 mt-1 font-black">
+                        GRATIS
+                      </span>
                     </motion.span>
                   </motion.h1>
                   <motion.p
-                    className="text-xs md:text-2xl font-bold text-emerald-600 mt-2"
+                    className="text-xs md:text-xl font-black text-red-500 mt-1"
                     animate={{
                       scale: [1, 1.05, 1],
                     }}
@@ -199,15 +237,106 @@ export function HeroSection() {
                   </motion.p>
                 </motion.div>
 
+                {/* Carta Astral Destacada */}
+                <motion.div
+                  variants={cardVariants}
+                  className="bg-gradient-to-br from-[#E9934D]/20 to-red-600/20 backdrop-blur-xl rounded-3xl p-4 shadow-2xl border-2 border-[#E9934D]/50 max-w-2xl mx-auto"
+                  whileHover={{
+                    scale: 1.05,
+                    boxShadow: "0 25px 50px -12px rgba(233, 147, 77, 0.5)",
+                  }}
+                >
+                  <div className="text-center">
+                    <motion.div
+                      className="text-4xl mb-2"
+                      animate={{
+                        rotate: [0, 360],
+                        scale: [1, 1.2, 1],
+                      }}
+                      transition={{
+                        duration: 4,
+                        repeat: Number.POSITIVE_INFINITY,
+                        ease: "easeInOut",
+                      }}
+                    >
+                      ✨🔮✨
+                    </motion.div>
+                    <motion.h2
+                      className="text-lg md:text-3xl font-black text-[#E9934D] mb-2"
+                      animate={{
+                        textShadow: [
+                          "0 0 10px rgba(233, 147, 77, 0.5)",
+                          "0 0 20px rgba(233, 147, 77, 0.8)",
+                          "0 0 10px rgba(233, 147, 77, 0.5)",
+                        ],
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Number.POSITIVE_INFINITY,
+                        ease: "easeInOut",
+                      }}
+                    >
+                      CARTA ASTRAL DE REGALO 🎁
+                    </motion.h2>
+
+                    <p className="text-sm md:text-lg font-bold text-red-400">
+                      Descubre tu destino y potencial oculto
+                    </p>
+                  </div>
+                </motion.div>
+
+                {/* CTA Section */}
+                <motion.div
+                  variants={cardVariants}
+                  className="text-center mt-6"
+                >
+                  <div className="flex flex-col items-center gap-2">
+                    <motion.button
+                      onClick={handleWhatsAppClick}
+                      disabled={loadingStates["register"]}
+                      className="group relative bg-gradient-to-r from-[#E9934D] via-yellow-500 to-[#E9934D] hover:from-yellow-400 hover:to-[#E9934D] disabled:from-[#E9934D]/60 disabled:to-yellow-600/60 text-black font-black py-1 px-3 text-lg lg:text-2xl rounded-full shadow-2xl overflow-hidden min-w-[140px] lg:min-w-[200px] min-h-[40px] lg:min-h-[50px] flex items-center justify-center gap-2 border-2 border-red-500"
+                      whileHover={{
+                        scale: 1.05,
+                        boxShadow: "0 25px 50px -12px rgba(233, 147, 77, 0.8)",
+                      }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-[#E9934D]"
+                        initial={{ x: "-100%" }}
+                        whileHover={{ x: "0%" }}
+                        transition={{ duration: 0.3 }}
+                      />
+                      <div className="relative flex items-center gap-2">
+                        {loadingStates["register"] ? (
+                          <>
+                            <CircularLoader />
+                            <span className="font-black">CONECTANDO...</span>
+                          </>
+                        ) : (
+                          <>
+                            <motion.div className="text-xl mr-1">
+                              💰
+                            </motion.div>
+                            <span className="text-md font-black">
+                              Comenzar YA!
+                            </span>
+                          </>
+                        )}
+                      </div>
+                    </motion.button>
+                  </div>
+                </motion.div>
+
                 {/* Bento Grid Layout */}
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 lg:gap-4">
                   {/* Video Card - Spans 2 columns on desktop */}
                   <motion.div
                     variants={cardVariants}
-                    className="lg:col-span-2 bg-white/70 backdrop-blur-xl rounded-3xl p-6 shadow-2xl border border-white/50"
+                    className="lg:col-span-2 bg-black/70 backdrop-blur-xl rounded-3xl p-3 shadow-2xl border-2 border-[#E9934D]/50"
                     whileHover={{
                       scale: 1.02,
-                      boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
+                      boxShadow: "0 25px 50px -12px rgba(233, 147, 77, 0.4)",
                     }}
                   >
                     <div className="relative rounded-2xl overflow-hidden shadow-xl">
@@ -219,9 +348,9 @@ export function HeroSection() {
                         playsInline
                         className="w-full h-auto object-cover"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
                       <motion.div
-                        className="absolute top-4 right-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold flex items-center gap-2"
+                        className="absolute top-2 right-2 bg-gradient-to-r from-red-500 to-red-600 text-white px-2 py-1 rounded-full text-xs font-black flex items-center gap-1 border border-[#E9934D]"
                         animate={{
                           scale: [1, 1.1, 1],
                         }}
@@ -230,114 +359,51 @@ export function HeroSection() {
                           repeat: Number.POSITIVE_INFINITY,
                         }}
                       >
-                        <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
+                        <div className="w-1 h-1 bg-[#E9934D] rounded-full animate-pulse" />
                         EN VIVO
                       </motion.div>
                     </div>
                   </motion.div>
 
                   {/* Location Card Grande */}
-                  <motion.div
+                 {/*  <motion.div
                     variants={cardVariants}
-                    className="bg-gradient-to-br from-blue-500/10 to-indigo-500/10 backdrop-blur-xl rounded-3xl p-4 shadow-2xl border border-blue-200/50"
+                    className="bg-gradient-to-br from-[#107B6B]/20 to-[#E9934D]/20 backdrop-blur-xl rounded-3xl p-2 shadow-2xl border-2 border-[#E9934D]/50"
                     whileHover={{
                       scale: 1.1,
-                      backgroundColor: "rgba(59, 130, 246, 0.2)",
+                      backgroundColor: "rgba(233, 147, 77, 0.3)",
                     }}
                   >
                     <div className="text-center flex flex-row lg:flex-col items-center justify-center lg:justify-center lg:items-center lg:text-6xl lg:gap-4">
-                      <div className="flex items-center justify-center gap-2 mb-2 lg:gap-4 lg:mb-4">
-                        <MapPin className="w-5 h-5 text-blue-600 lg:w-10 lg:h-10" />
+                      <div className="flex items-center justify-center gap-1 mb-1 lg:gap-2 lg:mb-2">
+                        <MapPin className="w-3 h-3 text-[#E9934D] lg:w-5 lg:h-5" />
                         {loadingLocalidad ? (
-                          <div className="h-5 bg-blue-200 rounded animate-pulse w-20 lg:w-40" />
+                          <div className="h-3 bg-[#E9934D]/50 rounded animate-pulse w-10 lg:w-20" />
                         ) : (
-                          <span className="text-slate-700 font-semibold text-xs lg:text-2xl font-anton">
+                          <span className="text-[#107B6B] font-black text-xs lg:text-xl">
                             {localidad || "Argentina"}
                           </span>
                         )}
                       </div>
-                      <motion.div className="text-2xl ml-2 mb-2 lg:text-8xl lg:ml-0">
+                      <motion.div className="text-xl ml-1 mb-1 lg:text-6xl lg:ml-0">
                         🇦🇷
                       </motion.div>
                     </div>
-                  </motion.div>
+                  </motion.div> */}
                 </div>
-
-                {/* CTA Section */}
-                <motion.div
-                  variants={cardVariants}
-                  className="text-center mt-12"
-                >
-                  <div className="flex flex-col items-center gap-4">
-                    <div className="flex items-center gap-3">
-                      <motion.p
-                        className="text-slate-600 text-xs"
-                        animate={{
-                          opacity: [0.7, 1, 0.7],
-                        }}
-                        transition={{
-                          duration: 2,
-                          repeat: Number.POSITIVE_INFINITY,
-                          ease: "easeInOut",
-                        }}
-                      >
-                        CARGA Y TE REGALAMOS TU{" "}
-                        <span className="font-bold">CARTA ASTRAL</span>
-                      </motion.p>
-                      <img
-                        src="https://static.whatsapp.net/rsrc.php/v4/yz/r/ujTY9i_Jhs1.png"
-                        alt="WhatsApp"
-                        className="w-4 h-4 mb-1"
-                      />
-                    </div>
-
-                    <motion.button
-                      onClick={handleWhatsAppClick}
-                      disabled={loadingStates["register"]}
-                      className="group relative bg-gradient-to-r from-yellow-500 to-green-500 hover:from-yellow-400 hover:to-green-400 disabled:from-yellow-600 disabled:to-green-600 text-white font-black py-6 px-12 text-xl lg:text-3xl rounded-full shadow-2xl overflow-hidden min-w-[280px] lg:min-w-[400px] min-h-[80px] lg:min-h-[100px] flex items-center justify-center gap-4"
-                      whileHover={{
-                        scale: 1.05,
-                        boxShadow: "0 25px 50px -12px rgba(16, 185, 129, 0.5)",
-                      }}
-                      whileTap={{ scale: 0.98 }}
-                    >
-                      <motion.div
-                        className="absolute inset-0 bg-gradient-to-r from-green-400 to-yellow-400"
-                        initial={{ x: "-100%" }}
-                        whileHover={{ x: "0%" }}
-                        transition={{ duration: 0.3 }}
-                      />
-                      <div className="relative flex items-center gap-4">
-                        {loadingStates["register"] ? (
-                          <>
-                            <CircularLoader />
-                            <span>CONECTANDO...</span>
-                          </>
-                        ) : (
-                          <>
-                            <motion.div className="text-2xl mr-1">
-                              💰
-                            </motion.div>
-                            <span className="text-lg">Comenzar YA!</span>
-                          </>
-                        )}
-                      </div>
-                    </motion.button>
-                  </div>
-                </motion.div>
 
                 {/* Sin límite Card */}
                 <motion.div
                   variants={cardVariants}
-                  className="bg-transparent backdrop-blur-xl rounded-3xl p-2 shadow-xl border border-orange-200/50 max-w-md mx-auto"
+                  className="bg-gradient-to-br from-red-600/20 to-[#E9934D]/20 backdrop-blur-xl rounded-3xl p-2 shadow-xl border-2 border-[#E9934D]/50 max-w-sm mx-auto"
                   whileHover={{
                     scale: 1.05,
-                    backgroundColor: "rgba(249, 115, 22, 0.15)",
+                    backgroundColor: "rgba(233, 147, 77, 0.25)",
                   }}
                 >
                   <div className="text-center flex justify-center">
-                    <motion.h2 className="text-sm lg:text-2xl font-black text-center">
-                      <span className="text-[#295445]">
+                    <motion.h2 className="text-xs lg:text-xl font-black text-center">
+                      <span className="text-[#107B6B] font-black">
                         SIN LIMITE DE RETIRO AL DIA
                       </span>
                     </motion.h2>
