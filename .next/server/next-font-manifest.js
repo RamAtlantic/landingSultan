@@ -1,0 +1,1 @@
+self.__NEXT_FONT_MANIFEST='{"pages":{},"app":{"/Users/ramiroatlantic/Desktop/CASINOS/SultanBet/landing-sultan/app/layout":["static/media/62d466ce3199db61-s.p.woff2","static/media/ab86f138d0d6e9da-s.p.woff2"]},"appUsingSizeAdjust":true,"pagesUsingSizeAdjust":false}';
