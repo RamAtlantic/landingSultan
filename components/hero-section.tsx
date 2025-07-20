@@ -19,7 +19,7 @@ export function HeroSection() {
     [key: string]: boolean;
   }>({});
 
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
 
 
   const handleWhatsAppClick = async () => {
@@ -317,7 +317,7 @@ export function HeroSection() {
                 </motion.div>
 
                 {/* Bento Grid Layout */}
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 lg:gap-4">
+                <div className="grid grid-cols-1 lg:grid-cols-1 gap-3 lg:gap-4">
                   {/* Video Card - Spans 2 columns on desktop */}
                   <motion.div
                     variants={cardVariants}

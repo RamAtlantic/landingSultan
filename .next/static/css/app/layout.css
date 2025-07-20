@@ -942,6 +942,9 @@ video {
 .w-\[100px\] {
   width: 100px;
 }
+.w-\[100vw\] {
+  width: 100vw;
+}
 .w-\[1px\] {
   width: 1px;
 }
@@ -956,9 +959,6 @@ video {
 }
 .w-px {
   width: 1px;
-}
-.w-\[100vw\] {
-  width: 100vw;
 }
 .min-w-0 {
   min-width: 0px;
@@ -3320,6 +3320,10 @@ body {
 
   .lg\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .lg\:grid-cols-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
   }
 
   .lg\:flex-col {
