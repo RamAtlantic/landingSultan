@@ -18,28 +18,9 @@ export function HeroSection() {
   const [loadingStates, setLoadingStates] = useState<{
     [key: string]: boolean;
   }>({});
-  const [localidad, setLocalidad] = useState<string | null>(null);
-  const [loadingLocalidad, setLoadingLocalidad] = useState<boolean>(true);
-  const [isHovered, setIsHovered] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
-  const isMobile = useIsMobile();
 
-  useEffect(() => {
-    setIsVisible(true);
-    const fetchLocalidad = async () => {
-      try {
-        const ipResponse = await axios.get("https://api.ipify.org?format=json");
-        const ip = ipResponse.data.ip;
-        const geoRes = await axios.get(`https://ipinfo.io/${ip}/json`);
-        setLocalidad(geoRes.data.city);
-      } catch (e: any) {
-        console.warn("No se pudo obtener la localidad:", e.message);
-      } finally {
-        setLoadingLocalidad(false);
-      }
-    };
-    fetchLocalidad();
-  }, []);
+  const [isVisible, setIsVisible] = useState(false);
+
 
   const handleWhatsAppClick = async () => {
     setLoadingStates((prevStates) => ({ ...prevStates, whatsapp: true }));
