@@ -197,7 +197,7 @@ export function HeroSection() {
                         backgroundSize: "200% 100%",
                       }}
                     >
-                      CREA TU USUARIO EN SEGUNDOS{" "}
+                      CREA TU USUARIO EN SEGUNDOS,{" "}
                       <span className="mt-1 font-extrabold">
                         GRATIS
                       </span>
@@ -261,7 +261,7 @@ export function HeroSection() {
                     </motion.h2>
 
                     <p className="text-sm md:text-lg font-bold text-red-400">
-                      Descubre tu destino y potencial oculto
+                    RECIBI UN INFORME PERSONALIZADO, HECHO POR UNA ASTRÓLOGA DEL EQUIPO
                     </p>
                   </div>
                 </motion.div>
@@ -311,7 +311,7 @@ export function HeroSection() {
                      
                     </motion.button>
                     <div className="text-xs text-gray-400 w-[100vw] text-center">
-                        Con tu carga descarga tu <span className="font-extrabold">CARTA ASTRAL</span>
+                        Con tu carga pedinos tu <span className="font-extrabold">CARTA ASTRAL</span>
                       </div>
                   </div>
                 </motion.div>
